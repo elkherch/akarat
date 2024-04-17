@@ -93,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'khdev$db_ar',
         'USER': 'khdev',
-        'PASSWORD': '22025khdev',
+        'PASSWORD': 'kh49717443',
         'HOST': 'khdev.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
