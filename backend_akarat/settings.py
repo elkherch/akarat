@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-5kef(a3ji-!o8=7c=ae5eayaw2l$qmw1yi^0gf*z&zu29*@)m0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','khdev.pythonanywhere.com','khdev.mysql.pythonanywhere-services.com']
+ALLOWED_HOSTS = ['localhost','khdev.pythonanywhere.com']
 
 
 # Application definition
@@ -58,10 +58,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend_akarat.urls'
 CORS_ALLOWED_ORIGINS = [
-    "https://khdev.pythonanywhere.com",
     "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    'http://localhost:3001',
     'http://khdev.pythonanywhere.com'
 ]
 CORS_ALLOW_ALL_ORIGINS = True
