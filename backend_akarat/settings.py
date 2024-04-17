@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'db_ar',
         'USER': 'khdev',
         'PASSWORD': '22025khdev',
-        'HOST': 'localhost',
+        'HOST': 'khdev.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }
