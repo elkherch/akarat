@@ -75,6 +75,7 @@ def sing_in(request):
     # Si la méthode de la requête n'est pas POST, renvoie une réponse indiquant que cette méthode n'est pas autorisée
     return HttpResponse("This method is not a POST")
 @api_view(['POST'])
+
 @csrf_exempt
 def fetch_user(request):
     if request.method == 'POST':
@@ -83,13 +84,12 @@ def fetch_user(request):
             iduser = data.get('iduser')
             users = Profile.objects.filter(user=iduser)
 
-            _list_users = []
+            _list_users = {}
             for profile in users:
                 utilisateur = profile.user
                 user = User.objects.get(id=utilisateur.id)
 
-                bien_data = {
-                    
+                profile_data = {
                     'type_compte': profile.type_compte,
                     'numero_tel': profile.numero_tel,
                     'facebook': profile.facebook,
@@ -97,10 +97,10 @@ def fetch_user(request):
                     'first_name': user.first_name,
                     'email': user.email,
                 }
-                _list_users.append(bien_data)
+                _list_users[str(utilisateur.id)] = profile_data  
 
             print(_list_users)
-            return JsonResponse({'list_biens': _list_users}, safe=False, status=200)
+            return JsonResponse({'list_users': _list_users}, safe=False, status=200)
         except json.decoder.JSONDecodeError as e:
             return JsonResponse({'error': 'Erreur lors du décodage des données JSON.'}, status=400)
     else:
