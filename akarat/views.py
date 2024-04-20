@@ -112,8 +112,8 @@ def create_biens_immobiliers(request):
     data = request.data
     bien_data = {
         'type_de_bien': data.get('type_de_bien'),
-        'prix': float(data.get('prix', 0)),  # Convertir en float ou gérer les erreurs
-        'surface': int(data.get('surface', 0)),  # Convertir en int ou gérer les erreurs
+        'prix': data.get('prix'),  # Convertir en float ou gérer les erreurs
+        'surface': data.get('surface'),  # Convertir en int ou gérer les erreurs
         'nombre_de_salles_de_bains': int(data.get('nombre_de_salles_de_bains', 0)),
         'nombre_de_salles_de_sals': int(data.get('nombre_de_salles_de_sals', 0)),
         'description': data.get('description'),
@@ -148,7 +148,6 @@ def biens_immobiliers_list(request):
     biens_immobiliers = Biens_immobiliers.objects.all()
     
     _list_biens = []
-    
     for bien in biens_immobiliers:
         # Récupérer toutes les images associées à ce bien immobilier
         images = Image.objects.filter(bien_immobilier=bien)

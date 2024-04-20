@@ -26,9 +26,7 @@ SECRET_KEY = 'django-insecure-5kef(a3ji-!o8=7c=ae5eayaw2l$qmw1yi^0gf*z&zu29*@)m0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','khdev.pythonanywhere.com']
-
-
+ALLOWED_HOSTS = ['localhost','khdev.pythonanywhere.com','10.0.2.2','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
@@ -59,6 +57,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'backend_akarat.urls'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    'http://10.0.2.2:8000',
     'http://khdev.pythonanywhere.com'
 ]
 CORS_ALLOW_ALL_ORIGINS = True
@@ -85,29 +85,29 @@ WSGI_APPLICATION = 'backend_akarat.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'khdev$akarat',
-        'USER': 'khdev',
-        'PASSWORD': 'kh49717443',
-        'HOST': 'khdev.mysql.pythonanywhere-services.com', 
-        'PORT': '3306',
-        'OPTIONS': {
-'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-}
-    }
-}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'db_ar',
-#         'USER': 'root',
-#         'PASSWORD': '',
-#         'HOST': 'localhost', 
+#         'NAME': 'khdev$akarat',
+#         'USER': 'khdev',
+#         'PASSWORD': 'kh49717443',
+#         'HOST': 'khdev.mysql.pythonanywhere-services.com', 
 #         'PORT': '3306',
+#         'OPTIONS': {
+# 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+# }
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_ar',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost', 
+        'PORT': '3306',
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
