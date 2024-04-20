@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class Biens_immobiliersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Biens_immobiliers
-        fields = ['BienID', 'type_de_bien', 'prix', 'surface', 'nombre_de_salles_de_bains', 'nombre_de_salles_de_sals', 'description', 'date_publication', 'lien', 'id_user']
+        fields = ['BienID', 'type_de_bien', 'prix', 'surface', 'nombre_de_salles_de_bains', 'nombre_de_salles_de_sals', 'description', 'date_publication','categorie','region','emplacement','adresse', 'lien', 'id_user']
 class FavorisSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favoris

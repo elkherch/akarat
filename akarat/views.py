@@ -117,8 +117,11 @@ def create_biens_immobiliers(request):
         'nombre_de_salles_de_bains': int(data.get('nombre_de_salles_de_bains', 0)),
         'nombre_de_salles_de_sals': int(data.get('nombre_de_salles_de_sals', 0)),
         'description': data.get('description'),
+        'categorie': data.get('categorie'),
+        'region': data.get('region'),
+        'emplacement': data.get('emplacement'),
+        'adresse': data.get('adresse'),
         'date_publication': data.get('date_publication'),
-        'lien': data.get('lien'),
         'id_user': data.get('id_user'),
     }
 
@@ -166,6 +169,12 @@ def biens_immobiliers_list(request):
             'lien': bien.lien,
             'id_user': bien.id_user.id if bien.id_user else None,
             'date_publication': bien.date_publication,
+            'region': bien.region,
+            'emplacement': bien.emplacement,
+            'adresse': bien.adresse,
+            'categorie': bien.categorie,
+
+
         })
     
     # Convertir la liste en format JSON
@@ -202,6 +211,10 @@ def fetch_biens_immobiliers(request):
                             'username': user.username,
                             'first_name':user.first_name,
                             'email':user.email,
+                            'region': bien.region,
+                            'emplacement': bien.emplacement,
+                            'adresse': bien.adresse,
+                            'categorie': bien.categorie,
                         }
                         _list_biens.append(bien_data)
                 else:

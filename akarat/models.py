@@ -18,16 +18,18 @@ class Profile(models.Model):
 # Modèle Biens_immobiliers
 class Biens_immobiliers(models.Model):
     BienID = models.AutoField(primary_key=True)
-    type_de_bien = models.CharField(max_length=20)
-    prix = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
-    surface = models.IntegerField(default=0)
+    type_de_bien = models.CharField(max_length=50)
+    prix = models.CharField(max_length=80)
+    surface = models.CharField(max_length=90)
+    categorie = models.CharField(max_length=90, null=True, blank=True)
+    adresse = models.CharField(max_length=90, null=True, blank=True)
+    region = models.CharField(max_length=90, null=True, blank=True)
+    emplacement = models.CharField(max_length=90, null=True, blank=True)
     nombre_de_salles_de_bains = models.IntegerField()
     nombre_de_salles_de_sals = models.IntegerField()
     description = models.CharField(max_length=200)
     date_publication = models.DateTimeField()
-    lien = models.CharField(max_length=100)
     id_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
 # Modèle Image
 class Image(models.Model):
     imageID = models.AutoField(primary_key=True)
