@@ -39,10 +39,8 @@ class Image(models.Model):
 class Ville(models.Model):
     VilleID = models.AutoField(primary_key=True)
     Nom_ville = models.CharField(max_length=100)
-
     def __str__(self):
         return self.Nom_ville
-    
 class Favoris(models.Model):
     FavoriID = models.AutoField(primary_key=True)
     ProfileID = models.ForeignKey(Profile, on_delete=models.CASCADE)
