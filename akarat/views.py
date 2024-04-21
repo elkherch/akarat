@@ -314,17 +314,19 @@ def favorie_biens(request):
         try:
             data = json.loads(request.body.decode('utf-8'))
             iduser = data.get('iduser')
-            idbiens = data.get('idbien')
-            biens_immobiliers = Biens_immobiliers.objects.filter(id_user_id=iduser, BienID=idbiens)
+            idbien = data.get('idbien')
+
+            favoris = Favoris.objects.filter(ProfileID=iduser, BienID=idbien)
             _list_biens = []
-            for bien in biens_immobiliers:
-                if bien.id_user_id is not None:
+
+            for favori in favoris:
+                bien = favori.BienID
+                if bien:
                     images = Image.objects.filter(bien_immobilier=bien)
-        
-#                     # Liste des URLs des images associées à ce bien immobilier
                     image_urls = [image.image.url for image in images]
+
                     user = User.objects.filter(id=bien.id_user_id).first()
-                    if user is not None:
+                    if user:
                         bien_data = {
                             'bienID': bien.BienID,
                             'type_de_bien': bien.type_de_bien,
@@ -333,22 +335,20 @@ def favorie_biens(request):
                             'nombre_de_salles_de_bains': bien.nombre_de_salles_de_bains,
                             'nombre_de_salles_de_sals': bien.nombre_de_salles_de_sals,
                             'description': bien.description,
-                            'images':image_urls,
+                            'images': image_urls,
                             'id_user': bien.id_user_id,
                             'username': user.username,
-                            'first_name':user.first_name,
-                            'email':user.email,
+                            'first_name': user.first_name,
+                            'email': user.email,
                             'region': bien.region,
                             'emplacement': bien.emplacement,
                             'adresse': bien.adresse,
                             'categorie': bien.categorie,
                         }
                         _list_biens.append(bien_data)
-                else:
-                    print("id user ................")
-            print(_list_biens)
+
             return JsonResponse({'list_biens': _list_biens}, safe=False, status=200)
         except json.decoder.JSONDecodeError as e:
             return JsonResponse({'error': 'Erreur lors du décodage des données JSON.'}, status=400)
     else:
-        return Response(status=404)
+        return JsonResponse({'error': 'Méthode non autorisée.'}, status=405)

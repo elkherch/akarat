@@ -6,7 +6,6 @@ from django.conf import settings
 urlpatterns = [
     path('create_user/', create_user, name='create_user'),
     path('login/', sing_in, name='sing_in'),
-
     path('user_list/', profile_list, name='profile_list'),
     path('favorie/', favorie_biens, name='favorie_biens'),
     path('create_favorie/', create_favorie, name='create_favorie'),
