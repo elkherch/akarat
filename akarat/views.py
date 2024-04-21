@@ -281,6 +281,32 @@ def create_favorie(request):
         return Response(serializer.data, status=201)
     else:
         return Response(serializer.errors, status=400)
+@api_view(['DELETE'])
+def delete_favorie(request):
+    data = request.data
+    favori_id = data.get('favori_id')
+    
+    try:
+        favori = Favoris.objects.get(pk=favori_id)
+    except Favoris.DoesNotExist:
+        return Response({"error": "Le favori spécifié n'existe pas."}, status=404)
+    
+    favori.delete()
+    return Response({"message": "Le favori a été supprimé avec succès."}, status=200)
+
+@api_view(['PUT', 'PATCH'])
+def update_favorie(request, favori_id):
+    try:
+        favori = Favoris.objects.get(pk=favori_id)
+    except Favoris.DoesNotExist:
+        return Response({"error": "Le favori spécifié n'existe pas."}, status=404)
+    
+    serializer = FavorisSerializer(favori, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=200)
+    else:
+        return Response(serializer.errors, status=400)
 @api_view(['POST'])
 @csrf_exempt
 def favorie_biens(request):
