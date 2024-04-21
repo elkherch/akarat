@@ -314,9 +314,7 @@ def favorie_biens(request):
         try:
             data = json.loads(request.body.decode('utf-8'))
             iduser = data.get('iduser')
-            idbien = data.get('idbien')
-
-            favoris = Favoris.objects.filter(ProfileID=iduser, BienID=idbien)
+            favoris = Favoris.objects.filter(ProfileID=iduser)
             _list_biens = []
 
             for favori in favoris:
