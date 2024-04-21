@@ -165,7 +165,6 @@ def biens_immobiliers_list(request):
             'nombre_de_salles_de_sals': bien.nombre_de_salles_de_sals,
             'images': image_urls,  # Liste des URLs des images associées
             'description': bien.description,
-            'lien': bien.lien,
             'id_user': bien.id_user.id if bien.id_user else None,
             'date_publication': bien.date_publication,
             'region': bien.region,
@@ -202,9 +201,7 @@ def fetch_biens_immobiliers(request):
                             'surface': bien.surface,
                             'nombre_de_salles_de_bains': bien.nombre_de_salles_de_bains,
                             'nombre_de_salles_de_sals': bien.nombre_de_salles_de_sals,
-                            'image':  None,
                             'description': bien.description,
-                            'lien': bien.lien,
                             'images':image_urls,
                             'id_user': bien.id_user_id,
                             'username': user.username,
