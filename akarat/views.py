@@ -284,10 +284,10 @@ def create_favorie(request):
 @api_view(['DELETE'])
 def delete_favorie(request):
     data = request.data
-    favori_id = data.get('favori_id')
+    bien_id = data.get('bien_id')
     
     try:
-        favori = Favoris.objects.get(pk=favori_id)
+        favori = Favoris.objects.get(BienID=bien_id)
     except Favoris.DoesNotExist:
         return Response({"error": "Le favori spécifié n'existe pas."}, status=404)
     
