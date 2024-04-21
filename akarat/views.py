@@ -284,7 +284,7 @@ def create_favorie(request):
 @api_view(['DELETE'])
 def delete_favorie(request):
     data = request.data
-    bien_id = data.get('bien_id')
+    bien_id = int(data.get('bien_id', 0))
     
     try:
         favori = Favoris.objects.get(BienID=bien_id)
