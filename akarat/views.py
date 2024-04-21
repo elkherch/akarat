@@ -271,8 +271,8 @@ def liste_biens(request):
 def create_favorie(request):
     data = request.data
     favorie_data = {
-        'ProfileID': data['iduser'],
-        'BienID': data['idbien'],
+        'ProfileID': int(data.get('iduser', 0)),
+        'BienID': int(data.get('idbien', 0)),
     }
     serializer = FavorisSerializer(data=favorie_data)
 
