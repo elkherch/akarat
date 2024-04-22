@@ -193,6 +193,8 @@ def fetch_biens_immobiliers(request):
 #                     # Liste des URLs des images associées à ce bien immobilier
                     image_urls = [image.image.url for image in images]
                     user = User.objects.filter(id=bien.id_user_id).first()
+                    profile = Profile.objects.filter(ProfileID=bien.id_user_id).first()
+
                     if user is not None:
                         bien_data = {
                             'bienID': bien.BienID,
@@ -207,6 +209,7 @@ def fetch_biens_immobiliers(request):
                             'username': user.username,
                             'first_name':user.first_name,
                             'email':user.email,
+                            'numero':profile.numero_tel,
                             'region': bien.region,
                             'emplacement': bien.emplacement,
                             'adresse': bien.adresse,
