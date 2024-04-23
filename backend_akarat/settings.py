@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'backend_akarat.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'khdev$akarat',
+        'NAME': 'khdev$akarat_db',
         'USER': 'khdev',
         'PASSWORD': 'kh49717443',
         'HOST': 'khdev.mysql.pythonanywhere-services.com', 
