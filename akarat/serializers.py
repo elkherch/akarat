@@ -4,7 +4,7 @@ from .models import Profile, Biens_immobiliers, Favoris, Commentaires_et_évalua
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['ProfileID', 'user', 'type_compte', 'numero_tel', 'facebook', 'logo_profile']
+        fields = ['ProfileID', 'user', 'numero_tel']
  
 class Biens_immobiliersSerializer(serializers.ModelSerializer):
     class Meta:

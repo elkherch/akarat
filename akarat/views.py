@@ -32,20 +32,17 @@ def create_user(request):
     data = request.data
     
     user_data = {
-        'username': data['username'],
-        'first_name': data['first_name'],
-        'email': data['email'],
-        'password': data['password']
+        'username': data.get('username', None),
+        'first_name': data.get('first_name', None),
+        'email': data.get('email',None),
+        'password': data.get('password',None)
     }
     
     # Créer l'utilisateur
     user = User.objects.create_user(**user_data)
-
     profile_data = {
-        'user': user.id,  # Utiliser l'identifiant de l'utilisateur
-        'type_compte': data['type_compte'],
-        'numero_tel': data['numero_tel'],
-        'facebook': data['facebook'],
+        'user': user.id,
+        'numero_tel': data.get('numero_tel',None),
     }
 
     serializer = ProfileSerializer(data=profile_data)
@@ -58,16 +55,15 @@ def create_user(request):
 @api_view(['POST'])
 @csrf_exempt
 def sing_in(request):
-    if request.method == "POST":  # Vérifie si la méthode est POST
-        data = json.loads(request.body.decode('utf-8'))  # Extrait les données JSON de la requête
-        username = data.get('username', None)  # Extrait le nom d'utilisateur de données JSON
-        password = data.get('password', None)  # Extrait le mot de passe de données JSON
+    if request.method == "POST":
+        data = json.loads(request.body.decode('utf-8'))
+        username = data.get('username', None) 
+        password = data.get('password', None)
 
         # Authentification de l'utilisateur avec les identifiants fournis
         authenticated_user = authenticate(request, username=username, password=password)
 
         if authenticated_user:  # Si l'authentification réussit
-            # Retourne une réponse JSON avec le succès et l'ID de l'utilisateur
             return JsonResponse({"success": True, "user_id": authenticated_user.id})
         else:
             # Si l'authentification échoue, retourne une réponse JSON avec un message d'erreur
