@@ -4,9 +4,9 @@ from django.conf import settings
 class Profile(models.Model):
     ProfileID = models.AutoField(primary_key=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    type_compte = models.CharField(max_length=20,null=True,)
+    type_compte = models.CharField(max_length=20,null=True,blank=True)
     numero_tel = models.CharField(max_length=8)    
-    facebook = models.CharField(max_length=20,null=True,)
+    facebook = models.CharField(max_length=20,null=True,blank=True)
     logo_profile = models.ImageField(upload_to='profile_logos/', blank=True, null=True)
 
     def get_username(self):
