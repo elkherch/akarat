@@ -63,17 +63,17 @@ def sing_in(request):
         data = json.loads(request.body.decode('utf-8'))
         username = data.get('username', None) 
         password = data.get('password', None)
-
-        # Authentification de l'utilisateur avec les identifiants fournis
         authenticated_user = authenticate(request, username=username, password=password)
-
-        if authenticated_user:  # Si l'authentification réussit
-            return JsonResponse({"success": True, "user_id": authenticated_user.id})
+        if authenticated_user:  
+            user_data = {
+                "success": True,
+                "user_id": authenticated_user.id,
+                "is_superuser": authenticated_user.is_superuser
+            }
+            return JsonResponse(user_data)
         else:
-            # Si l'authentification échoue, retourne une réponse JSON avec un message d'erreur
             return JsonResponse({'message': "Invalid credentials.", "success": False})
 
-    # Si la méthode de la requête n'est pas POST, renvoie une réponse indiquant que cette méthode n'est pas autorisée
     return HttpResponse("This method is not a POST")
 @api_view(['POST'])
 
