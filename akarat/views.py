@@ -31,18 +31,22 @@ def profile_list(request):
 def create_user(request):
     data = request.data
     
+    username = data.get('username', None)
+    # Vérifier si le nom d'utilisateur existe déjà
+    if User.objects.filter(username=username).exists():
+        return JsonResponse({'error': 'Ce nom d\'utilisateur existe déjà'}, status=400)
     user_data = {
-        'username': data.get('username', None),
+        'username': username,
         'first_name': data.get('first_name', None),
-        'email': data.get('email',None),
-        'password': data.get('password',None)
+        'email': data.get('email', None),
+        'password': data.get('password', None)
     }
     
     # Créer l'utilisateur
     user = User.objects.create_user(**user_data)
     profile_data = {
         'user': user.id,
-        'numero_tel': data.get('numero_tel',None),
+        'numero_tel': data.get('numero_tel', None),
     }
 
     serializer = ProfileSerializer(data=profile_data)
@@ -51,7 +55,7 @@ def create_user(request):
         serializer.save()
         return Response(serializer.data, status=201)
     else:
-        return Response(serializer.errors, status=400)
+        return JsonResponse({"message": "Invalid credentials."}, status=400)
 @api_view(['POST'])
 @csrf_exempt
 def sing_in(request):
@@ -338,6 +342,19 @@ def delete_favorie(request):
     
     favori.delete()
     return Response({"message": "Le favori a été supprimé avec succès."}, status=200)
+
+@api_view(['DELETE'])
+def delete_bien(request):
+    data = request.data
+    bien_id = int(data.get('bien_id', 0))
+    
+    try:
+        bien = Biens_immobiliers.objects.get(BienID=bien_id)
+    except Favoris.DoesNotExist:
+        return Response({"error": "Le bien spécifié n'existe pas."}, status=404)
+    
+    bien.delete()
+    return Response({"message": "Le bien a été supprimé avec succès."}, status=200)
 
 @api_view(['PUT', 'PATCH'])
 def update_favorie(request, favori_id):
