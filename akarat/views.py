@@ -344,18 +344,14 @@ def delete_favorie(request):
     return Response({"message": "Le favori a été supprimé avec succès."}, status=200)
 
 @api_view(['DELETE'])
-def delete_bien(request):
-    data = request.data
-    bien_id = int(data.get('bien_id', 0))
-    
+def delete_bien(request, bien_id):
     try:
         bien = Biens_immobiliers.objects.get(BienID=bien_id)
-    except Favoris.DoesNotExist:
+    except Biens_immobiliers.DoesNotExist:
         return Response({"error": "Le bien spécifié n'existe pas."}, status=404)
     
     bien.delete()
     return Response({"message": "Le bien a été supprimé avec succès."}, status=200)
-
 @api_view(['PUT', 'PATCH'])
 def update_favorie(request, favori_id):
     try:
